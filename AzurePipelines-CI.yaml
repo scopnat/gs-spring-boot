@@ -9,7 +9,8 @@ steps:
   displayName: 'Maven app/pom.xml'
   inputs:
     mavenPomFile: 'app/pom.xml'
-    codeCoverageToolOption: Cobertura
+    options: '-DskipITs --settings ./maven/settings.xml'
+
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
