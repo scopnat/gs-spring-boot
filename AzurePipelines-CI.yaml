@@ -1,6 +1,6 @@
 pool:
-  vmImage: az400m05l05a-pool #'ubuntu-16.04' # Hosted Ubuntu 1604
-  demands: maven
+  name: Azure Pipelines
+  demands: maven #'ubuntu-16.04' # Hosted Ubuntu 1604
 
 steps:
 - task: Maven@3
