@@ -1,6 +1,8 @@
+trigger:
+- main
+ 
 pool:
-  name: Azure Pipelines
-  demands: maven
+vmImage: ubuntu-18.04
 
 #Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
@@ -13,15 +15,15 @@ steps:
 
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**/*.jar'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+displayName: 'Copy Files'
+inputs:
+SourceFolder: '$(build.sourcesdirectory)'
+Contents: |
+**/target/*.war
+*.sql
+TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+displayName: 'Publish Artifact'
+inputs:
+PathtoPublish: '$(build.artifactstagingdirectory)'
